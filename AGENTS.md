@@ -14,4 +14,5 @@ The mirrored test directories have no `__init__.py` (a `test` package would shad
 
 ## Running tests
 
-`uv run --no-project --with pytest --with hypothesis pytest`
+`uv run pytest`.
+Test tooling is a uv dev dependency group (`uv add --dev <pkg>`) installed into `.venv/`; `[tool.pyright]` in `pyproject.toml` points the editor at that venv, so imports resolve in nvim.

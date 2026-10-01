@@ -1,5 +1,24 @@
+[project]
+name = "sandbox"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = []
+
+[tool.uv]
+package = false
+
 [tool.pytest.ini_options]
 testpaths = ["test"]
 pythonpath = ["."]
 # Mirrored test dirs have no __init__.py, so same-named test files in different dirs must not collide.
 addopts = ["--import-mode=importlib"]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.168.3",
+    "pytest>=9.1.1",
+]
