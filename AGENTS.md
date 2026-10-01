@@ -12,6 +12,14 @@ Either it repeats the module: `biology/p1_1_x.py` -> `test/biology/test_p1_1_x.p
 Or, once the module's classes or functions each earn a test file, a directory named after the module holds one file per class or function: `test/biology/p2_1_x/test_BoyerMoore.py`.
 The mirrored test directories have no `__init__.py` (a `test` package would shadow the stdlib one), so `pyproject.toml` sets `--import-mode=importlib` to let same-named test files coexist.
 
+## Docstrings
+
+Compact PEP 257 prose in reST, the way Hypothesis writes them, with no NumPy or Google sections (2026-10-01).
+A one-line imperative summary, then an inline `Analysis:` line with asymptotic time and space (Unicode `Θ` is fine), then one doctest example.
+Type hints carry parameter and return types, so the docstring never repeats them.
+Results only, never derivations: a claim like `Θ(nm) worst case` belongs, the proof does not.
+Example: `biology/p1_1_naive_exact_matching.py`.
+
 ## Running tests
 
 `uv run pytest`.
