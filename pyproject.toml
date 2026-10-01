@@ -1,0 +1,5 @@
+[tool.pytest.ini_options]
+testpaths = ["test"]
+pythonpath = ["."]
+# Mirrored test dirs have no __init__.py, so same-named test files in different dirs must not collide.
+addopts = ["--import-mode=importlib"]
