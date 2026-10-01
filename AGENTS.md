@@ -22,5 +22,6 @@ Example: `biology/p1_1_naive_exact_matching.py`.
 
 ## Running tests
 
-`uv run pytest`.
+`uv run pytest` runs the tests and the doctest examples in source docstrings (`--doctest-modules`).
+`uv run ruff check .` and `uv run ruff format .` lint and format; rules are the defaults plus `I`, `UP`, `B` in `[tool.ruff.lint]`.
 Test tooling is a uv dev dependency group (`uv add --dev <pkg>`) installed into `.venv/`; `[tool.pyright]` in `pyproject.toml` points the editor at that venv, so imports resolve in nvim.

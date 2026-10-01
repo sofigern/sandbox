@@ -8,10 +8,15 @@ dependencies = []
 package = false
 
 [tool.pytest.ini_options]
-testpaths = ["test"]
+testpaths = ["test", "biology"]
 pythonpath = ["."]
 # Mirrored test dirs have no __init__.py, so same-named test files in different dirs must not collide.
-addopts = ["--import-mode=importlib"]
+# --doctest-modules runs the examples in source docstrings.
+addopts = ["--import-mode=importlib", "--doctest-modules"]
+
+[tool.ruff.lint]
+# On top of the defaults: import sorting, outdated syntax, likely bugs.
+extend-select = ["I", "UP", "B"]
 
 [tool.pyright]
 venvPath = "."
@@ -21,4 +26,5 @@ venv = ".venv"
 dev = [
     "hypothesis>=6.168.3",
     "pytest>=9.1.1",
+    "ruff>=0.16.9",
 ]
