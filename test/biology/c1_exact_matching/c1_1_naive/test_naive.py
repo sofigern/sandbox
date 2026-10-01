@@ -1,7 +1,7 @@
 from hypothesis import given
 from hypothesis import strategies as st
 
-from biology.p1_1_naive_exact_matching import naive
+from biology.c1_exact_matching.c1_1_naive.naive import naive
 
 # A two-letter alphabet makes matches, overlaps and near-misses common.
 dna = st.text(alphabet="ab", max_size=12)
