@@ -3,3 +3,4 @@ __pycache__/
 .hypothesis/
 .venv/
 .claude/settings.local.json
+.benchmarks/

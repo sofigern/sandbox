@@ -13,6 +13,9 @@ pythonpath = ["."]
 # Mirrored test dirs have no __init__.py, so same-named test files in different dirs must not collide.
 # --doctest-modules runs the examples in source docstrings.
 addopts = ["--import-mode=importlib", "--doctest-modules"]
+# benchmark/ is outside testpaths, so it runs only on request: `uv run pytest benchmark`.
+python_files = ["test_*.py", "bench_*.py"]
+python_functions = ["test_*", "bench_*"]
 
 [tool.ruff.lint]
 # On top of the defaults: import sorting, outdated syntax, likely bugs.
@@ -26,5 +29,6 @@ venv = ".venv"
 dev = [
     "hypothesis>=6.168.3",
     "pytest>=9.1.1",
+    "pytest-benchmark>=5.3.0",
     "ruff>=0.16.9",
 ]
