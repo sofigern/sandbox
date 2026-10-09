@@ -20,6 +20,8 @@ python_functions = ["test_*", "bench_*"]
 [tool.ruff.lint]
 # On top of the defaults: import sorting, outdated syntax, likely bugs.
 extend-select = ["I", "UP", "B"]
+# Textbook algorithms name their indices l, r, k; renaming them hides the book.
+ignore = ["E741"]
 
 [tool.pyright]
 venvPath = "."
