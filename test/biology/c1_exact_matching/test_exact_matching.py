@@ -12,6 +12,7 @@ from biology.c1_exact_matching.c1_1_naive.naive import naive
 from biology.c1_exact_matching.c1_5_linear_simple import (
     linear_compact,
     linear_optimized,
+    linear_quick,
     linear_simple,
 )
 
@@ -24,8 +25,16 @@ implementations = pytest.mark.parametrize(
         linear_simple.match,
         linear_optimized.match,
         linear_compact.match,
+        linear_quick.match,
     ],
-    ids=["naive", "naive_jump", "linear_simple", "linear_optimized", "linear_compact"],
+    ids=[
+        "naive",
+        "naive_jump",
+        "linear_simple",
+        "linear_optimized",
+        "linear_compact",
+        "linear_quick",
+    ],
 )
 
 
