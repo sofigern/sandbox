@@ -2,7 +2,7 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from biology.c1_exact_matching.c1_1_naive.c1_4_linear_preprocessing import (
+from biology.c1_exact_matching.c1_4_linear_preprocessing import (
     preprocessing,
     preprocessing_compact,
 )
