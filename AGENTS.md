@@ -34,4 +34,6 @@ Example: `biology/c1_exact_matching/c1_1_naive/naive.py`.
 Benchmarks live in their own top-level `benchmark/`, mirroring the source tree, in `bench_*.py` files with `bench_*` functions (pytest-benchmark).
 They sit outside `testpaths`, so plain `uv run pytest` and CI skip them; run them on request with `uv run pytest benchmark`.
 Each benchmark is parametrised over the same `implementations` as the contract tests and over named workloads from a fixed seed; compare numbers from one machine only.
+Peak memory comes from the same files under `uv run pytest benchmark --memray --benchmark-disable --trace-python-allocators --most-allocations=0` (pytest-memray).
+A docstring's O(1) or Θ(m) space claim is checked by a separate `bench_*` function that takes no `benchmark` fixture and carries `pytest.mark.limit_memory`; never put that mark on a timed function, because pytest-memray traces a marked test even without `--memray` and the traced code runs 2-4x slower (measured 2026-10-10).
 Test tooling is a uv dev dependency group (`uv add --dev <pkg>`) installed into `.venv/`; `[tool.pyright]` in `pyproject.toml` points the editor at that venv, so imports resolve in nvim.

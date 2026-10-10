@@ -46,9 +46,12 @@ They time every implementation of a problem on the same named workloads, such as
 They are slow and their numbers depend on the machine, so plain `uv run pytest` and CI skip them; run them on request:
 
 ```sh
-uv run pytest benchmark
+uv run pytest benchmark                                # time
+uv run pytest benchmark --memray --benchmark-disable --trace-python-allocators --most-allocations=0   # peak memory
 ```
 
+The second form runs each benchmark once under [memray](https://bloomberg.github.io/memray/) and prints, for every case, the peak allocation and the functions responsible.
+A solution whose docstring claims constant or `Θ(m)` space is also run under a `limit_memory` check, so that claim is tested on every benchmark run, not just stated.
 Compare numbers from one machine, run back to back, never across machines.
 To focus on one workload, add `-k worst_case`; to keep a run and compare a later one against it, use `--benchmark-autosave` and then `--benchmark-compare`.
 Only trust the timing of a solution that passes its tests: a solution that skips work it should not do is fast and wrong.

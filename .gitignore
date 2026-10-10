@@ -4,3 +4,7 @@ __pycache__/
 .venv/
 .claude/settings.local.json
 .benchmarks/
+
+# memray captures and reports from manual profiling runs
+*.bin
+memray-flamegraph-*.html
