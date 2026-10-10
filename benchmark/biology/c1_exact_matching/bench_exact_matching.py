@@ -3,6 +3,7 @@ from pydoc_data.topics import topics
 
 import pytest
 
+from biology.c1_exact_matching import builtin
 from biology.c1_exact_matching.c1_1_naive.c1_1_1_naive_improvements.naive_improvements import (
     naive_jump,
 )
@@ -17,6 +18,7 @@ from biology.c1_exact_matching.c1_5_linear_simple import (
 implementations = pytest.mark.parametrize(
     "find",
     [
+        builtin.match,
         naive,
         naive_jump,
         linear_simple.match,
@@ -25,6 +27,7 @@ implementations = pytest.mark.parametrize(
         linear_quick.match,
     ],
     ids=[
+        "builtin",
         "naive",
         "naive_jump",
         "linear_simple",
@@ -39,6 +42,7 @@ implementations = pytest.mark.parametrize(
 constant_space = pytest.mark.parametrize(
     "find",
     [
+        builtin.match,
         naive,
         naive_jump,
         linear_optimized.match,
@@ -46,6 +50,7 @@ constant_space = pytest.mark.parametrize(
         linear_quick.match,
     ],
     ids=[
+        "builtin",
         "naive",
         "naive_jump",
         "linear_optimized",

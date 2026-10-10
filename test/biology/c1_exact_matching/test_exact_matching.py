@@ -5,6 +5,7 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
+from biology.c1_exact_matching import builtin
 from biology.c1_exact_matching.c1_1_naive.c1_1_1_naive_improvements.naive_improvements import (
     naive_jump,
 )
@@ -20,6 +21,7 @@ from biology.c1_exact_matching.c1_5_linear_simple import (
 implementations = pytest.mark.parametrize(
     "find",
     [
+        builtin.match,
         naive,
         naive_jump,
         linear_simple.match,
@@ -28,6 +30,7 @@ implementations = pytest.mark.parametrize(
         linear_quick.match,
     ],
     ids=[
+        "builtin",
         "naive",
         "naive_jump",
         "linear_simple",
