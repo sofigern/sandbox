@@ -7,9 +7,30 @@ from biology.c1_exact_matching.c1_1_naive.c1_1_1_naive_improvements.naive_improv
     naive_jump,
 )
 from biology.c1_exact_matching.c1_1_naive.naive import naive
+from biology.c1_exact_matching.c1_5_linear_simple import (
+    linear_compact,
+    linear_optimized,
+    linear_simple,
+)
 
 implementations = pytest.mark.parametrize(
-    "find", [naive, naive_jump], ids=["naive", "naive_jump"]
+    "find",
+    [
+        naive,
+        naive_jump,
+        linear_simple.match,
+        linear_optimized.match,
+        linear_compact.match,
+    ],
+    ids=["naive", "naive_jump", "linear_simple", "linear_optimized", "linear_compact"],
+)
+# Matchers whose docstrings claim O(1) or Θ(m) space. Checked in bench_constant_space,
+# never on the timed function: a `limit_memory` mark makes pytest-memray trace the
+# test even without `--memray`, which slows the traced code 2-4x.
+constant_space = pytest.mark.parametrize(
+    "find",
+    [naive, naive_jump, linear_optimized.match, linear_compact.match],
+    ids=["naive", "naive_jump", "linear_optimized", "linear_compact"],
 )
 
 # Fixed seed: every run, and every implementation, times the same inputs.
@@ -35,3 +56,13 @@ def bench_exact_matching(benchmark, find, workload):
     p, t = workloads[workload]
     benchmark.group = workload
     benchmark(lambda: list(find(p, t)))
+
+
+# 16 KB is a few frames and the result list, and ten times below the Θ(n)
+# matchers' 176 KB on the smallest workload, so only a change of shape trips it.
+@pytest.mark.limit_memory("16 KB")
+@pytest.mark.parametrize("workload", workloads)
+@constant_space
+def bench_constant_space(find, workload):
+    p, t = workloads[workload]
+    list(find(p, t))

@@ -6,11 +6,12 @@ from biology.c1_exact_matching.c1_4_linear_preprocessing import (
     preprocessing,
     preprocessing_compact,
 )
+from biology.c1_exact_matching.c1_5_linear_simple import linear_compact
 
 implementations = pytest.mark.parametrize(
     "z_of",
-    [preprocessing.z_values, preprocessing_compact.z_values],
-    ids=["gusfield", "compact"],
+    [preprocessing.z_values, preprocessing_compact.z_values, linear_compact.z_values],
+    ids=["gusfield", "compact", "shared_scan"],
 )
 
 

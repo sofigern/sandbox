@@ -9,10 +9,23 @@ from biology.c1_exact_matching.c1_1_naive.c1_1_1_naive_improvements.naive_improv
     naive_jump,
 )
 from biology.c1_exact_matching.c1_1_naive.naive import naive
+from biology.c1_exact_matching.c1_5_linear_simple import (
+    linear_compact,
+    linear_optimized,
+    linear_simple,
+)
 
 # Every exact-matching algorithm in the chapter must honour the same contract.
 implementations = pytest.mark.parametrize(
-    "find", [naive, naive_jump], ids=["naive", "naive_jump"]
+    "find",
+    [
+        naive,
+        naive_jump,
+        linear_simple.match,
+        linear_optimized.match,
+        linear_compact.match,
+    ],
+    ids=["naive", "naive_jump", "linear_simple", "linear_optimized", "linear_compact"],
 )
 
 
