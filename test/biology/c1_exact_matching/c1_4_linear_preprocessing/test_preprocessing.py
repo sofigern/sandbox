@@ -15,9 +15,10 @@ implementations = pytest.mark.parametrize(
 
 
 def z_by_definition(s: str) -> list[int]:
-    """Z[k] is the length of the longest substring at k that is a prefix of s."""
+    """Z[k], for each position 0 <= k <= len(s), is the length of the longest
+    substring at k that is a prefix of s."""
     z = []
-    for k in range(len(s)):
+    for k in range(len(s) + 1):
         n = 0
         while k + n < len(s) and s[n] == s[k + n]:
             n += 1
@@ -32,23 +33,23 @@ def test_each_value_is_the_longest_prefix_match_at_that_position(z_of, s):
 
 
 @implementations
-def test_first_value_is_the_whole_string(z_of):
-    assert z_of("abc")[0] == 3
+def test_first_value_is_the_whole_string_and_last_is_the_empty_suffix(z_of):
+    assert z_of("abc") == [3, 0, 0, 0]
 
 
 @implementations
-def test_empty_string_has_no_values(z_of):
-    assert z_of("") == []
+def test_empty_string_has_one_position(z_of):
+    assert z_of("") == [0]
 
 
 @implementations
 def test_gusfield_example(z_of):
     """Gusfield, Algorithms on Strings, Trees and Sequences, section 1.3."""
-    assert z_of("aabcaabxaaz") == [11, 1, 0, 0, 3, 1, 0, 0, 2, 1, 0]
+    assert z_of("aabcaabxaaz") == [11, 1, 0, 0, 3, 1, 0, 0, 2, 1, 0, 0]
 
 
 @implementations
 def test_extends_a_z_box_reached_from_inside_another(z_of):
     """At k=3, k lies inside the Z-box [2, 5) and Z[1] reaches its end, so the
     match is extended past r by explicit comparison."""
-    assert z_of("abababx") == [7, 0, 4, 0, 2, 0, 0]
+    assert z_of("abababx") == [7, 0, 4, 0, 2, 0, 0, 0]

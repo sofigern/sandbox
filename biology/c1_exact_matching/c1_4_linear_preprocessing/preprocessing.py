@@ -7,36 +7,35 @@ def _match_length(s: str, i: int, j: int) -> int:
 
 
 def z_values(s: str) -> list[int]:
-    """Return Z[k], the length of the longest substring at k that is a prefix of s.
+    """Return Z[k] for each position k of s, 0 <= k <= len(s): the length of the
+    longest substring at k that is a prefix of s.
 
-    Z[0] is len(s) by convention. Gusfield's case split: a position outside the
-    Z-box is compared from scratch, one inside reuses Z[k - l] and compares only
-    past the box's end.
+    Z[0] is len(s) and Z[len(s)] is 0, the empty suffix. Gusfield's case split:
+    a position outside the Z-box is compared from scratch, one inside reuses
+    Z[k - l] and compares only past the box's end.
 
     Analysis: Θ(n) time, Θ(n) space, with n = len(s).
 
     >>> z_values("aabcaabxaaz")
-    [11, 1, 0, 0, 3, 1, 0, 0, 2, 1, 0]
+    [11, 1, 0, 0, 3, 1, 0, 0, 2, 1, 0, 0]
     """
-    if not s:
-        return []
-
-    z = [len(s)]
+    z = [0] * (len(s) + 1)
+    z[0] = len(s)
     l = r = 0
     for k in range(1, len(s)):
         if k >= r:
             if n := _match_length(s, 0, k):
                 l = k
                 r = k + n
-            z.append(n)
+            z[k] = n
         else:
             k_ = k - l
             b_len = r - k
             if z[k_] < b_len:
-                z.append(z[k_])
+                z[k] = z[k_]
             else:
                 n = _match_length(s, b_len, r)
-                z.append(b_len + n)
+                z[k] = b_len + n
                 l = k
                 r = r + n
     return z

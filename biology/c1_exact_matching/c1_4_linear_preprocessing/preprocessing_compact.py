@@ -1,18 +1,19 @@
 def z_values(s: str) -> list[int]:
-    """Return Z[k], the length of the longest substring at k that is a prefix of s.
+    """Return Z[k] for each position k of s, 0 <= k <= len(s): the length of the
+    longest substring at k that is a prefix of s.
 
-    Z[0] is len(s) by convention. One path for every position: start from what
-    the Z-box already proves, extend by comparison, move the box if it grew.
+    Z[0] is len(s) and Z[len(s)] is 0, the empty suffix. One path for every
+    position: start from what the Z-box already proves, extend by comparison,
+    move the box if it grew.
 
     Analysis: Θ(n) time, Θ(n) space, with n = len(s).
 
     >>> z_values("aabcaabxaaz")
-    [11, 1, 0, 0, 3, 1, 0, 0, 2, 1, 0]
+    [11, 1, 0, 0, 3, 1, 0, 0, 2, 1, 0, 0]
     """
     n = len(s)
-    z = [0] * n
-    if n:
-        z[0] = n
+    z = [0] * (n + 1)
+    z[0] = n
     l = r = 0  # the Z-box s[l:r] that reaches furthest right so far
     for k in range(1, n):
         if k < r:
