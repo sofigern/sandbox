@@ -7,11 +7,19 @@ from biology.c1_exact_matching.c1_4_linear_preprocessing import (
     preprocessing_compact,
 )
 from biology.c1_exact_matching.c1_5_linear_simple import linear_compact
+from biology.c1_exact_matching.c1_6_exercises.c1_6_6_case_2b_without_comparison import (
+    case_2b,
+)
 
 implementations = pytest.mark.parametrize(
     "z_of",
-    [preprocessing.z_values, preprocessing_compact.z_values, linear_compact.z_values],
-    ids=["gusfield", "compact", "shared_scan"],
+    [
+        preprocessing.z_values,
+        case_2b.z_values,
+        preprocessing_compact.z_values,
+        linear_compact.z_values,
+    ],
+    ids=["gusfield", "gusfield_split", "compact", "shared_scan"],
 )
 
 # Fixed seed: every run, and every implementation, times the same inputs.

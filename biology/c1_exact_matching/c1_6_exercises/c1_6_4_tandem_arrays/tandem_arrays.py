@@ -12,6 +12,11 @@ the left or to the right. Given the base β, a tandem array of β in S can be
 described by two numbers (s, k): where it starts in S and how many times β is
 repeated. Suppose S has length n and β has length m. Give an O(n + m)-time
 algorithm that finds all maximal tandem arrays of β in S.
+
+Then give an O(n) algorithm that, from S and β, finds every maximal tandem
+array of β and outputs the pair (s, k) for each occurrence. Since maximal
+tandem arrays with a given base can overlap, a naive algorithm gives only an
+O(n²) bound.
 """
 
 from biology.c1_exact_matching.c1_5_linear_simple.linear_compact import (

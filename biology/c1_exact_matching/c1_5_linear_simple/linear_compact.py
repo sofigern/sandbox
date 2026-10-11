@@ -3,7 +3,7 @@ from collections.abc import Iterator, Sequence
 
 def prefix_lengths(p: str, t: str, z: Sequence[int], start: int = 0) -> Iterator[int]:
     """Yield, for each position k of ``t`` from ``start`` to ``len(t)``, how long a
-    prefix of ``p`` begins at ``t[k]``: the matching statistics of ``t`` against ``p``.
+    prefix of ``p`` begins at ``t[k]``: the Z values of ``p`` read across ``t``.
 
     The compact Z scan over two strings: start from what the Z-box already
     proves, extend by comparison, move the box if it grew. ``z`` must hold the Z
@@ -31,9 +31,9 @@ def z_values(s: str) -> list[int]:
     """Return Z[k] for each position k of s, 0 <= k <= len(s): the length of the
     longest substring at k that is a prefix of s.
 
-    Z[0] is len(s) and Z[len(s)] is 0, the empty suffix. The Z array is the
-    matching statistics of ``s`` against itself, so this is :func:`prefix_lengths`
-    reading the list it is still filling.
+    Z[0] is len(s) and Z[len(s)] is 0, the empty suffix. The Z array is
+    :func:`prefix_lengths` of ``s`` against itself, reading the list it is
+    still filling.
 
     Analysis: Θ(n) time, Θ(n) space, with n = len(s).
 
@@ -51,7 +51,7 @@ def z_values(s: str) -> list[int]:
 def match(p: str, t: str) -> Iterator[int]:
     """Yield every 0-based offset where ``p`` occurs in ``t``, overlaps included.
 
-    The positions of ``t`` whose matching statistic against ``p`` is all of
+    The positions of ``t`` where the prefix of ``p`` that matches is all of
     ``p``. Only ``p`` is preprocessed and offsets stream out as the scan
     reaches them; the position after the last character of ``t`` matches only
     the empty pattern.
