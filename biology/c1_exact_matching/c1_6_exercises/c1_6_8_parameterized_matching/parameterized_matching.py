@@ -1,7 +1,6 @@
 """Exercise 1.6.8: parameterized matching (Baker).
 
 Gusfield, Algorithms on Strings, Trees and Sequences, section 1.6, exercise 8.
-The statement continues on page 36; the part below is page 35.
 
 Baker [43] introduced the following matching problem, which she applied to
 software maintenance: "The application tracks duplication in a large software
@@ -41,7 +40,10 @@ wants all occurrences in O(|P| + |T|) time. Let the function Zᵖ[i] of a string
 S give the length of the longest string starting at position i that p-matches
 a prefix of S. Show how to modify the Z algorithm to compute all values Zᵖ[i]
 in O(|S|) time (the implementation details are a little trickier than for
-Z[i], but ... continues on page 36).
+Z[i], but still not very hard). Then show how to use this modified algorithm
+to find all substrings of T that p-match P in O(|P| + |T|) time. In [43] and
+[239] more intricate variants of the p-matching problem are solved by more
+elaborate methods.
 """
 
 from collections.abc import Callable, Iterator
