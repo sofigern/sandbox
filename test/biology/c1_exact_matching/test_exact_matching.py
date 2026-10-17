@@ -16,7 +16,10 @@ from biology.c1_exact_matching.c1_5_linear_simple import (
     linear_quick,
     linear_simple,
 )
-from biology.c2_classic_methods.c2_2_boyer_moore import boyer_moore
+from biology.c2_classic_methods.c2_2_boyer_moore import (
+    boyer_moore,
+    boyer_moore_extended,
+)
 
 # Every exact-matching algorithm in the chapter must honour the same contract.
 implementations = pytest.mark.parametrize(
@@ -30,6 +33,7 @@ implementations = pytest.mark.parametrize(
         linear_compact.match,
         linear_quick.match,
         boyer_moore.match,
+        boyer_moore_extended.match,
     ],
     ids=[
         "builtin",
@@ -40,6 +44,7 @@ implementations = pytest.mark.parametrize(
         "linear_compact",
         "linear_quick",
         "boyer_moore",
+        "boyer_moore_extended",
     ],
 )
 
