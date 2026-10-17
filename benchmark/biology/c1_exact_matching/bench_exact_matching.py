@@ -14,6 +14,7 @@ from biology.c1_exact_matching.c1_5_linear_simple import (
     linear_quick,
     linear_simple,
 )
+from biology.c2_classic_methods.c2_2_boyer_moore import boyer_moore
 
 implementations = pytest.mark.parametrize(
     "find",
@@ -25,6 +26,7 @@ implementations = pytest.mark.parametrize(
         linear_optimized.match,
         linear_compact.match,
         linear_quick.match,
+        boyer_moore.match,
     ],
     ids=[
         "builtin",
@@ -34,6 +36,7 @@ implementations = pytest.mark.parametrize(
         "linear_optimized",
         "linear_compact",
         "linear_quick",
+        "boyer_moore",
     ],
 )
 # Matchers whose docstrings claim O(1) or Θ(m) space. Checked in bench_constant_space,
@@ -48,6 +51,7 @@ constant_space = pytest.mark.parametrize(
         linear_optimized.match,
         linear_compact.match,
         linear_quick.match,
+        boyer_moore.match,
     ],
     ids=[
         "builtin",
@@ -56,6 +60,7 @@ constant_space = pytest.mark.parametrize(
         "linear_optimized",
         "linear_compact",
         "linear_quick",
+        "boyer_moore",
     ],
 )
 
